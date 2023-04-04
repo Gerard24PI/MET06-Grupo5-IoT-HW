@@ -60,7 +60,7 @@ void setupByChoice(int opt) {
       break; 
     case MENU_SLIGHT:
       Serial.println("Initializating Smart Light IoT...");  
-      //setupSmartLight();
+      setupSmartLight();
       break;
     case MENU_EXIT:
       Serial.println("Exiting program...");  
@@ -79,7 +79,7 @@ void executeByChoice(int opt) {
       grifo();
       break; 
     case MENU_SLIGHT:
-      //smartLight();
+      smartLight();
       break;
   }
 }
