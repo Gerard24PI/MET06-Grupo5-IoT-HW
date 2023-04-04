@@ -20,9 +20,16 @@ void LED::turnOn() {
 }
 
 void LED::turnOff() {
-  digitalWrite(pin, LOW);
   this->brightness_pct = MIN_BRIGHTNESS;
   this->led_high_ms = getMsFromBrightnessPct();
+}
+
+void LED::ledOn() {
+  digitalWrite(pin, HIGH);
+}
+
+void LED::ledOff() {
+  digitalWrite(pin, LOW);
 }
 
 /**
@@ -46,7 +53,7 @@ void LED::updateLED_routine() {
     case 0:
       //Espera temps a 0 (LOW)
       if (led_timer.waitTime_ms(led_period_ms-led_high_ms)) {
-        turnOn();
+        ledOn();
         led_timer.setTimeReference();
         led_state++;
       }
@@ -54,7 +61,7 @@ void LED::updateLED_routine() {
     case 1:
       //Espera temps a 1 (HIGH)
       if (led_timer.waitTime_ms(led_high_ms)) {
-        turnOff();
+        ledOff();
         led_timer.setTimeReference();
         led_state = 0;
       }
@@ -70,5 +77,13 @@ void LED::test() {
 
 
 int LED::getMsFromBrightnessPct() {
-  return trunc((brightness_pct/100)*led_period_ms);
+  int high_ms = trunc((brightness_pct*led_period_ms)/100);
+  Serial.print("\nTemps a 1: ");
+  Serial.print(high_ms,DEC);
+  Serial.print(" of ");
+  Serial.print(led_period_ms,DEC);
+  Serial.print(" ms (");
+  Serial.print(brightness_pct,DEC);
+  Serial.print("%)");
+  return high_ms;
 }

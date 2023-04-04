@@ -33,6 +33,8 @@ private:
   int brightness_pct;
   Timer led_timer;
   int getMsFromBrightnessPct();
+  void ledOn();
+  void ledOff();
 };
 
 #endif
