@@ -10,15 +10,15 @@
 #define PIN_GRIFO_LED             4     //D2
 
 //Grifo modes
-#define MODE_TANCAT     0
-#define MODE_SEMIOBERT  1
-#define MODE_OBERT      2
-#define N_MODES         3
+#define GRIFO_MODE_TANCAT     0
+#define GRIFO_MODE_SEMIOBERT  1
+#define GRIFO_MODE_OBERT      2
+#define GRIFO_N_MODES         3
 
 //Grifo position modes
-#define POS_TANCAT    0
-#define POS_SEMIOBERT 90
-#define POS_OBERT     180
+#define GRIFO_POS_TANCAT    0
+#define GRIFO_POS_SEMIOBERT 90
+#define GRIFO_POS_OBERT     180
 
 
 Button grifoModeButton;
@@ -34,8 +34,8 @@ void setupGrifo() {
   grifoServomotor = Servomotor(PIN_GRIFO_SERVOMOTOR);
 
   
-  grifoMode = MODE_TANCAT;
-  update_mode(grifoMode);
+  grifoMode = GRIFO_MODE_TANCAT;
+  grifo_update_mode(grifoMode);
 }
 
 void grifo() {
@@ -46,35 +46,35 @@ void grifo() {
   /**************************/
 
   if (grifoModeButton.isPressed()) {
-    change_mode();
+    grifo_change_mode();
   }
 
   if (grifoEmergencyButton.isPressed()) {
-    update_mode(MODE_TANCAT);
+    grifo_update_mode(GRIFO_MODE_TANCAT);
   }
 
 }
 
 
-void change_mode() {
-  grifoMode = (grifoMode+1) % N_MODES;
-  update_mode(grifoMode);
+void grifo_change_mode() {
+  grifoMode = (grifoMode+1) % GRIFO_N_MODES;
+  grifo_update_mode(grifoMode);
 }
 
-void update_mode(char mode) {
-  int degrees = POS_TANCAT;
+void grifo_update_mode(char mode) {
+  int degrees = GRIFO_POS_TANCAT;
   int brightness = LOW_BRIGHTNESS;
   switch(mode) {
-    case MODE_SEMIOBERT:
-      degrees = POS_SEMIOBERT;
+    case GRIFO_MODE_SEMIOBERT:
+      degrees = GRIFO_POS_SEMIOBERT;
       brightness = MED_BRIGHTNESS;
       break;
-    case MODE_OBERT:
-      degrees = POS_OBERT;
+    case GRIFO_MODE_OBERT:
+      degrees = GRIFO_POS_OBERT;
       brightness = HIGH_BRIGHTNESS;
       break;
-    case MODE_TANCAT:
-      degrees = POS_TANCAT;
+    case GRIFO_MODE_TANCAT:
+      degrees = GRIFO_POS_TANCAT;
       brightness = LOW_BRIGHTNESS;
       break;
   }
