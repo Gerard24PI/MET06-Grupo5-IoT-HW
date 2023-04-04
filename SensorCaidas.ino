@@ -1,3 +1,13 @@
+// Sensor objects
+TempHumSensor tempHumSensor(5000);
+PIRSensor pirSensor(PIN_PIR_SENSOR_BOTTOM, PIN_PIR_SENSOR_TOP);
+LED alarmLED;
+
+void setupSensorCaidas() {
+  alarmLED = LED(PIN_ALARM_LED_NOTIFICATION);
+  pirSensor.setupPIR();
+}
+
 void sensorCaidas(){
   // Humidity & Temp ALARM
   tempHumSensor.readSensorData();

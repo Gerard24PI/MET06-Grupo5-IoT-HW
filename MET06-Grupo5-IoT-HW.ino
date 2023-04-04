@@ -4,19 +4,11 @@
 #include "PIRSensor.h"
 #include "LED.h"
 
-
-// Sensor objects
-TempHumSensor tempHumSensor(5000);
-PIRSensor pirSensor(PIN_PIR_SENSOR_BOTTOM, PIN_PIR_SENSOR_TOP);
-LED alarmLED;
-
-
 // MENU 
 
 void setup() {
   // Setup code. runs once
-  alarmLED = LED(PIN_ALARM_LED_NOTIFICATION);
-  pirSensor.setupPIR();
+  setupSensorCaidas();
 
   Serial.begin(SERIAL_CONNECTION_SPEED);
   

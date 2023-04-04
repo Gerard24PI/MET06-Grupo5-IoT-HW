@@ -8,7 +8,7 @@
 // Debug Settings
 #define DEBUG_DEVICES_SETUP_BASIC     true
 #define DEBUG_ALARMS                  true
-#define DEBUG_TEMP_HUM_SENSOR         false
+#define DEBUG_TEMP_HUM_SENSOR         true
 
 // Pin Declarations for ESP8266 board
 #ifdef BOARD_ESP8266
