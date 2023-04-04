@@ -1,6 +1,7 @@
 #include "Timer.h"
 
 Timer::Timer() {
+  setTimeReference();
 }
 
 void Timer::setTimeReference() {
