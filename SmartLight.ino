@@ -1,7 +1,6 @@
 #include "Button.h"
 #include "LED.h"
-#include "Timer.h"
-
+#include "AnalogSensor.h"
 
 //sLight pins
 #define PIN_SLIGHT_MODEBUTTON      14     //D5
@@ -15,7 +14,6 @@
 #define SLIGHT_N_MODES              4
 
 
-#define CHECK_ADC_TIME_MS 60
 
 typedef struct {
   char min;
@@ -25,13 +23,13 @@ typedef struct {
 BrightnessRange brightnessRange;
 Button sLightModeButton;
 LED sLightLed;
-Timer sLightTimer;
+AnalogSensor sLightAnalogSensor;
 char sLightMode;
 
 void setupSmartLight() {
   sLightModeButton = Button(PIN_SLIGHT_MODEBUTTON);
   sLightLed = LED(PIN_SLIGHT_LED);
-  sLightTimer = Timer();
+  sLightAnalogSensor = AnalogSensor(PIN_SLIGHT_ADC);
   
   sLightMode = SLIGHT_MODE_RANGE_COMPLETE;
   sLight_update_mode(sLightMode);
@@ -47,12 +45,18 @@ void smartLight() {
     sLight_change_mode();
   }
 
-  if (sLightTimer.waitTime_ms(CHECK_ADC_TIME_MS)) {
-    //TODO: Check ADC value and update Brightness
-    //sLightADC.getValuePct();
+  //Cada X temps, es consulta valor Analògic i s'actualitza brightness segons valor analogic i el rang de brillantor permes en aquell mode
+  if (sLightAnalogSensor.analogAvailable()) {
+    int analogValPct = sLightAnalogSensor.getAnalogValuePct();
+    int brightness = getBrightnessAcordingRange(analogValPct);
+    sLightLed.setBrightness(brightness);
   }
 }
 
+//Extreu el valor de brightness dintre del rang especificat segons el percentatge
+int getBrightnessAcordingRange(int pct) {
+  return ((brightnessRange.max - brightnessRange.min)*pct)/100 + brightnessRange.min;
+}
 
 void sLight_change_mode() {
   sLightMode = (sLightMode+1) % SLIGHT_N_MODES;
