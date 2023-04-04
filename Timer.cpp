@@ -1,5 +1,7 @@
 #include "Timer.h"
 
+Timer::Timer() {
+}
 
 void Timer::setTimeReference() {
   timestamp_reference = millis();

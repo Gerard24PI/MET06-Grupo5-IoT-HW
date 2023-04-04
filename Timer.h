@@ -5,6 +5,7 @@
 
 class Timer {
   public:
+    Timer();
     void setTimeReference();
     bool waitTime_ms(int time_ms);
   private:
