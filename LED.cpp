@@ -14,12 +14,13 @@ LED::LED(int pin) {
 }
 
 void LED::turnOn() {
-  digitalWrite(pin, HIGH);
+  ledOn();
   this->brightness_pct = MAX_BRIGHTNESS;
   this->led_high_ms = getMsFromBrightnessPct();
 }
 
 void LED::turnOff() {
+  ledOff();
   this->brightness_pct = MIN_BRIGHTNESS;
   this->led_high_ms = getMsFromBrightnessPct();
 }
