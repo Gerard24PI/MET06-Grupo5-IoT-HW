@@ -52,6 +52,7 @@ void grifo() {
   if (grifoEmergencyButton.isPressed()) {
     update_mode(MODE_TANCAT);
   }
+
 }
 
 
@@ -79,6 +80,11 @@ void update_mode(char mode) {
   }
   grifoServomotor.moveServomotor(degrees);
   grifoLed.setBrightness(brightness);
-  //Serial.print("Mode: ");
-  //Serial.println(mode,DEC);
+
+  Serial.print("\nMode actualitzat a ");
+  Serial.println(grifoMode,DEC);
+  Serial.print("\tDegrees: ");
+  Serial.println(degrees,DEC);
+  Serial.print("\tBness: ");
+  Serial.println(grifoLed.getBrightness(),DEC);
 }
