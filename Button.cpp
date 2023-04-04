@@ -5,7 +5,7 @@ Button::Button() {
 
 Button::Button(int pin) {
   this->pin = pin;
-  pinMode(pin, INPUT);
+  pinMode(pin, INPUT_PULLUP);
   this->button_state = 0;
   this->rebound_time_ms = BUTTON_REBOUND_MS;
   this->status = false;
@@ -37,8 +37,8 @@ void Button::button_routine() {
     case 1:
       if (esperaRebots()) {
         if (buttonConsult()) {
+          //Serial.println("\nButton pressed");
           status = true;
-          //update_mode(change_mode());
           button_state++;
         }
         else {
