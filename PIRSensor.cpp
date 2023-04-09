@@ -50,6 +50,10 @@ boolean PIRSensor::isInTheRoom() {
   boolean presenceBot = readPresence(pinPirSensorBottom);
   boolean presenceTop = readPresence(pinPirSensorTop);
   if (presenceBot && presenceTop) {
+
+    if(DEBUG_PIR_SENSOR){
+      Serial.println("Is in the room");
+    }
     return true;
   }
   return false;
@@ -59,6 +63,9 @@ boolean PIRSensor::isInTheFloor() {
   boolean presenceBot = readPresence(pinPirSensorBottom);
   boolean presenceTop = readPresence(pinPirSensorTop);
   if (presenceBot && !presenceTop) {
+    if(DEBUG_PIR_SENSOR){
+      Serial.println("Is in the floor");
+    }
     return true;
   }
   return false;

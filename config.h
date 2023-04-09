@@ -1,21 +1,37 @@
-// BOARD
+// Global Settings
+#define SERIAL_CONNECTION_SPEED       9600
 #define BOARD_ESP8266
 
 
-// Global Settings
-#define SERIAL_CONNECTION_SPEED       9600
-
-// Debug Settings
+// Debugging Settings
 #define DEBUG_DEVICES_SETUP_BASIC     true
-#define DEBUG_ALARMS                  true
-#define DEBUG_TEMP_HUM_SENSOR         true
+#define DEBUG_ALARMS                  false
+#define DEBUG_PIR_SENSOR              true
+#define DEBUG_TEMP_HUM_SENSOR         false
+#define DEBUG_BUTTONS                 false
+#define DEBUG_TIMING                  false
+#define DEBUG_GRIFO                   false
+#define DEBUG_LEDS                    false
+
+
+// Menu Options
+#define MENU_SCAIDAS  1
+#define MENU_GRIFO    2
+#define MENU_SLIGHT   3
+#define MENU_EXIT     4
+
 
 // Pin Declarations for ESP8266 board
 #ifdef BOARD_ESP8266
   #define BOARD_NAME                  "ESP8266"
-  #define PIN_PIR_SENSOR_BOTTOM       5
-  #define PIN_PIR_SENSOR_TOP          16
-  #define PIN_ALARM_LED_NOTIFICATION  4
-  #define PIN_ALARM_BUTTON            10 // TODO: Confirm button pin
-  #define PIN_TEMP_SENSOR             0
+  #define PIN_PIR_SENSOR_BOTTOM       13           // D8 (Intermediate Board)
+  #define PIN_PIR_SENSOR_TOP          15           // D7 (Final Board)
+  #define PIN_ALARM_LED_NOTIFICATION  12           // D6 (RED LED)
+  #define PIN_AUX_LED                 16           // D0 (ToDO: Connect)         
+  #define PIN_ANALOG_INPUT            2            // A0 (50K POT)
+  #define PIN_ALARM_BUTTON            10           // SDD3 (RED BTN)
+  #define PIN_MODE_BUTTON             5            // D1 (BTN 1)
+  #define PIN_AUX_BUTTON              4            // D2 (BTN 2)
+  #define PIN_TEMP_SENSOR             2            // D4  (DHT22)
+  #define PIN_SERVO                   14           // D5  (J1)
 #endif

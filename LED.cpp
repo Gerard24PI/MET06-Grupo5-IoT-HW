@@ -79,12 +79,16 @@ void LED::test() {
 
 int LED::getMsFromBrightnessPct() {
   int high_ms = trunc((brightness_pct*led_period_ms)/100);
-  Serial.print("\nTemps a 1: ");
-  Serial.print(high_ms,DEC);
-  Serial.print(" of ");
-  Serial.print(led_period_ms,DEC);
-  Serial.print(" ms (");
-  Serial.print(brightness_pct,DEC);
-  Serial.print("%)");
+
+  if(DEBUG_LEDS){
+    Serial.print("\nTemps a 1: ");
+    Serial.print(high_ms,DEC);
+    Serial.print(" of ");
+    Serial.print(led_period_ms,DEC);
+    Serial.print(" ms (");
+    Serial.print(brightness_pct,DEC);
+    Serial.print("%)");
+  }
+  
   return high_ms;
 }

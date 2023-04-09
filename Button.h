@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 #include "Timer.h"
+#include "config.h"
 
 #define BUTTON_REBOUND_MS 16
 
