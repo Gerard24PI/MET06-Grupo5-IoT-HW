@@ -2,7 +2,7 @@
 #include "TempHumSensor.h"
 
 
-TempHumSensor::TempHumSensor(int alarm_interval) : dht(PIN_TEMP_SENSOR) {
+TempHumSensor::TempHumSensor(int alarm_interval, int pin) : dht(pin) {
   this->temperature = 0.0;
   this->humidity = 0.0;
   this->alarm_interval = alarm_interval;

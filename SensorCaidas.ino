@@ -1,5 +1,11 @@
+#include "config.h"
+#include "TempHumSensor.h"
+#include "PIRSensor.h"
+#include "LED.h"
+
+TempHumSensor tempHumSensor(5000, PIN_TEMP_SENSOR);
+
 // Sensor objects
-TempHumSensor tempHumSensor(5000);
 PIRSensor pirSensor(PIN_PIR_SENSOR_BOTTOM, PIN_PIR_SENSOR_TOP);
 LED alarmLED;
 

@@ -3,35 +3,33 @@
 #include "Servomotor.h"
 
 
-//Grifo pins
-#define PIN_GRIFO_SERVOMOTOR      15    //D8
-#define PIN_GRIFO_MODEBUTTON      14    //D5
-#define PIN_GRIFO_EMERGENCYBUTTON 12    //D5
-#define PIN_GRIFO_LED             4     //D2
-
-//Grifo modes
+// Grifo modes
 #define GRIFO_MODE_TANCAT     0
 #define GRIFO_MODE_SEMIOBERT  1
 #define GRIFO_MODE_OBERT      2
 #define GRIFO_N_MODES         3
 
-//Grifo position modes
+
+//Grifo modes degreess mapping
 #define GRIFO_POS_TANCAT    0
 #define GRIFO_POS_SEMIOBERT 90
 #define GRIFO_POS_OBERT     180
 
-
+// Sensor & Actuator objects
 Button grifoModeButton;
 Button grifoEmergencyButton;
 Servomotor grifoServomotor;
 LED grifoLed;
+
+
 char grifoMode;
 
+
 void setupGrifo() {
-  grifoModeButton = Button(PIN_GRIFO_MODEBUTTON);
-  grifoEmergencyButton = Button(PIN_GRIFO_EMERGENCYBUTTON);
-  grifoLed = LED(PIN_GRIFO_LED);
-  grifoServomotor = Servomotor(PIN_GRIFO_SERVOMOTOR);
+  grifoModeButton = Button(PIN_MODE_BUTTON);
+  grifoEmergencyButton = Button(PIN_ALARM_BUTTON);
+  grifoLed = LED(PIN_AUX_LED);
+  grifoServomotor = Servomotor(PIN_SERVO);
 
   
   grifoMode = GRIFO_MODE_TANCAT;
@@ -54,7 +52,6 @@ void grifo() {
   }
 
 }
-
 
 void grifo_change_mode() {
   grifoMode = (grifoMode+1) % GRIFO_N_MODES;
@@ -81,10 +78,13 @@ void grifo_update_mode(char mode) {
   grifoServomotor.moveServomotor(degrees);
   grifoLed.setBrightness(brightness);
 
-  Serial.print("\nMode actualitzat a ");
-  Serial.println(grifoMode,DEC);
-  Serial.print("\tDegrees: ");
-  Serial.println(degrees,DEC);
-  Serial.print("\tBness: ");
-  Serial.println(grifoLed.getBrightness(),DEC);
+  if(DEBUG_GRIFO){
+    Serial.print("\nMode actualitzat a ");
+    Serial.println(grifoMode,DEC);
+    Serial.print("\tDegrees: ");
+    Serial.println(degrees,DEC);
+    Serial.print("\tBness: ");
+    Serial.println(grifoLed.getBrightness(),DEC);
+  }
+  
 }

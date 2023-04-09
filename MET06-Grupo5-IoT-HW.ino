@@ -1,14 +1,5 @@
 #define BOARD_ESP8266
 #include "config.h"
-#include "TempHumSensor.h"
-#include "PIRSensor.h"
-#include "LED.h"
-
-// MENU 
-#define MENU_SCAIDAS  1
-#define MENU_GRIFO    2
-#define MENU_SLIGHT   3
-#define MENU_EXIT     4
 
 int option;
 
@@ -90,9 +81,7 @@ void setup() {
   option = printMenu();
   // Setup code. runs once
   setupByChoice(option);
-
 }
-
 
 
 void loop() {

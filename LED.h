@@ -3,6 +3,8 @@
 
 #include <Arduino.h>
 #include "Timer.h"
+#include "config.h"
+
 
 #define MIN_BRIGHTNESS  0
 #define LOW_BRIGHTNESS  25

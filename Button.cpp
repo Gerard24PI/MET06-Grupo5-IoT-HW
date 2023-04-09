@@ -37,7 +37,10 @@ void Button::button_routine() {
     case 1:
       if (esperaRebots()) {
         if (buttonConsult()) {
-          //Serial.println("\nButton pressed");
+          if (DEBUG_BUTTONS){
+            Serial.println("\nButton pressed");
+          }
+          
           status = true;
           button_state++;
         }

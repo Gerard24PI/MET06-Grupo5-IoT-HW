@@ -5,7 +5,7 @@
 #include <DHT22.h>
 
 // Sensor Configuration
-#define READING_INTERVAL        2000 // Sensor gives readings each 2200ms
+#define READING_INTERVAL        2000 // Sensor gives readings each 2000ms
 
 // ALARM configuration
 #define MIN_TEMP                10.0
@@ -35,7 +35,7 @@ class TempHumSensor {
      *
      * @param interval: Interval between sensor readings in milliseconds
      */
-    TempHumSensor(int interval);
+    TempHumSensor(int interval, int pin);
     
 
     

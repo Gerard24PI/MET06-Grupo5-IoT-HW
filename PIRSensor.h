@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 #include "LED.h"
+#include "config.h"
 
 class PIRSensor {
   private:

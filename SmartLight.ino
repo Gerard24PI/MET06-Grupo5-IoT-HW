@@ -2,34 +2,32 @@
 #include "LED.h"
 #include "AnalogSensor.h"
 
-//sLight pins
-#define PIN_SLIGHT_MODEBUTTON      14     //D5
-#define PIN_SLIGHT_LED             4      //D2
-#define PIN_SLIGHT_ADC             A0     //A0
-//sLight modes
+
+//Smart Light modes
 #define SLIGHT_MODE_RANGE_LOW       1
 #define SLIGHT_MODE_RANGE_MED       2
 #define SLIGHT_MODE_RANGE_HIGH      3
 #define SLIGHT_MODE_RANGE_COMPLETE  4
 #define SLIGHT_N_MODES              4
 
-
-
 typedef struct {
   char min;
   char max;
 } BrightnessRange;
+char sLightMode;
 
+
+// Sensor & Actuator Objects
 BrightnessRange brightnessRange;
 Button sLightModeButton;
 LED sLightLed;
 AnalogSensor sLightAnalogSensor;
-char sLightMode;
+
 
 void setupSmartLight() {
-  sLightModeButton = Button(PIN_SLIGHT_MODEBUTTON);
-  sLightLed = LED(PIN_SLIGHT_LED);
-  sLightAnalogSensor = AnalogSensor(PIN_SLIGHT_ADC);
+  sLightModeButton = Button(PIN_MODE_BUTTON);
+  sLightLed = LED(PIN_AUX_LED);
+  sLightAnalogSensor = AnalogSensor(PIN_ANALOG_INPUT);
   
   sLightMode = SLIGHT_MODE_RANGE_COMPLETE;
   sLight_update_mode(sLightMode);
