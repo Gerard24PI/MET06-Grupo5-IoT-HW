@@ -12,8 +12,8 @@
 
 //Grifo modes degreess mapping
 #define GRIFO_POS_TANCAT    0
-#define GRIFO_POS_SEMIOBERT 90
-#define GRIFO_POS_OBERT     180
+#define GRIFO_POS_SEMIOBERT 30
+#define GRIFO_POS_OBERT     120
 
 // Sensor & Actuator objects
 Button grifoModeButton;

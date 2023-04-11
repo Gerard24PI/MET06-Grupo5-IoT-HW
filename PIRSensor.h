@@ -23,6 +23,7 @@ class PIRSensor {
     boolean readPresence(int pin);
     void pirTest();
     bool checkAlarmStatus();
+    void resetAlarmStatus();
 };
 
 #endif

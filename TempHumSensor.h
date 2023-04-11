@@ -9,7 +9,7 @@
 
 // ALARM configuration
 #define MIN_TEMP                10.0
-#define MAX_TEMP                23.5
+#define MAX_TEMP                27.0
 #define MIN_HUMIDITY            10.0
 #define MAX_HUMIDITY            80.0
 

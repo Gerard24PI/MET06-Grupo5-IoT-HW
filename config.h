@@ -10,7 +10,7 @@
 #define DEBUG_TEMP_HUM_SENSOR         false
 #define DEBUG_BUTTONS                 false
 #define DEBUG_TIMING                  false
-#define DEBUG_GRIFO                   false
+#define DEBUG_GRIFO                   true
 #define DEBUG_LEDS                    false
 
 
@@ -25,10 +25,10 @@
 #ifdef BOARD_ESP8266
   #define BOARD_NAME                  "ESP8266"
   #define PIN_PIR_SENSOR_BOTTOM       13           // D8 (Intermediate Board)
-  #define PIN_PIR_SENSOR_TOP          15           // D7 (Final Board)
-  #define PIN_ALARM_LED_NOTIFICATION  12           // D6 (RED LED)
-  #define PIN_AUX_LED                 16           // D0 (ToDO: Connect)         
-  #define PIN_ANALOG_INPUT            2            // A0 (50K POT)
+  #define PIN_PIR_SENSOR_TOP          15           // D7 ( Board)
+  #define PIN_ALARM_LED_NOTIFICATION  16           // D6 (RED LED)
+  #define PIN_AUX_LED                 12            // SDD2          
+  #define PIN_ANALOG_INPUT            A0           // A0 (50K POT)
   #define PIN_ALARM_BUTTON            10           // SDD3 (RED BTN)
   #define PIN_MODE_BUTTON             5            // D1 (BTN 1)
   #define PIN_AUX_BUTTON              4            // D2 (BTN 2)
