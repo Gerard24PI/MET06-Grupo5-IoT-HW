@@ -4,10 +4,10 @@
 
 
 //Smart Light modes
-#define SLIGHT_MODE_RANGE_LOW       1
-#define SLIGHT_MODE_RANGE_MED       2
-#define SLIGHT_MODE_RANGE_HIGH      3
-#define SLIGHT_MODE_RANGE_COMPLETE  4
+#define SLIGHT_MODE_RANGE_LOW       0
+#define SLIGHT_MODE_RANGE_MED       1
+#define SLIGHT_MODE_RANGE_HIGH      2
+#define SLIGHT_MODE_RANGE_COMPLETE  3
 #define SLIGHT_N_MODES              4
 
 typedef struct {
@@ -88,6 +88,4 @@ void sLight_update_mode(char mode) {
 
   Serial.print("\nMode actualitzat a ");
   Serial.println(sLightMode,DEC);
-  Serial.print("\tBness: ");
-  Serial.println(sLightLed.getBrightness(),DEC);
 }
