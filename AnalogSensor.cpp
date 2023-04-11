@@ -16,6 +16,7 @@ bool AnalogSensor::analogAvailable() {
 
 int AnalogSensor::getAnalogValuePct() {
   int adcValue = getAnalogValue();
+  analogTimer.setTimeReference();
   return trunc((adcValue*100)/1024);
 }
 

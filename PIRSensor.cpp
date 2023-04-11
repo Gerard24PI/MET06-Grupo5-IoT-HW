@@ -1,6 +1,6 @@
 #include "PIRSensor.h"
 
-#define FALL_CHECK_TIME_MS 3000
+#define FALL_CHECK_TIME_MS 20
 
 PIRSensor::PIRSensor(int pinPirSensorBottom, int pinPirSensorTop) : pinPirSensorBottom(pinPirSensorBottom), pinPirSensorTop(pinPirSensorTop) {
   this->presence_alarm = false;
@@ -13,14 +13,22 @@ void PIRSensor::setupPIR() {
 }
 
 void PIRSensor::presenceRoutine() {
+  boolean presenceBot = readPresence(pinPirSensorBottom);
+  boolean presenceTop = readPresence(pinPirSensorTop);
+
+
+  //Serial.println(pirState);
+
   switch (pirState) {
     case 0:
+      presence_alarm = false;
       if (isInTheRoom()) {
         pirState = 1;
       }
       break;
     case 1:
       if (isInTheFloor()) {
+        //Serial.println(String(millis()/1000) +  "s --> [SENSORS] (PIR) Is in the room");
         pirState = 2;
         timestampFall = millis();
       }
@@ -34,26 +42,27 @@ void PIRSensor::presenceRoutine() {
         }
         else {
           pirState = 0;
+          //Serial.println(String(millis()/1000) +  "s --> [SENSORS] (PIR) Left The Room");
         }
       }
       break;
     case 3:
       presence_alarm = true;
-
       pirState = 0;
-      //Todo: set alarm to flase somewhere....
+      //Serial.println(String(millis()/1000) +  "s --> [SENSORS] (PIR) Is in the floor");
+      
+    
       break;
   }  
 }
+
+
 
 boolean PIRSensor::isInTheRoom() {
   boolean presenceBot = readPresence(pinPirSensorBottom);
   boolean presenceTop = readPresence(pinPirSensorTop);
   if (presenceBot && presenceTop) {
 
-    if(DEBUG_PIR_SENSOR){
-      Serial.println("Is in the room");
-    }
     return true;
   }
   return false;
@@ -63,9 +72,7 @@ boolean PIRSensor::isInTheFloor() {
   boolean presenceBot = readPresence(pinPirSensorBottom);
   boolean presenceTop = readPresence(pinPirSensorTop);
   if (presenceBot && !presenceTop) {
-    if(DEBUG_PIR_SENSOR){
-      Serial.println("Is in the floor");
-    }
+
     return true;
   }
   return false;
