@@ -15,7 +15,7 @@ void PIRSensor::setupPIR() {
 void PIRSensor::presenceRoutine() {
   boolean presenceBot = readPresence(pinPirSensorBottom);
   boolean presenceTop = readPresence(pinPirSensorTop);
-
+  Serial.println(String(millis()/1000) +  "s --> [SENSORS] PIRTop: " + String(presenceTop) + "PIRBot: " + String(presenceBot));
 
   //Serial.println(pirState);
 
@@ -28,7 +28,7 @@ void PIRSensor::presenceRoutine() {
       break;
     case 1:
       if (isInTheFloor()) {
-        //Serial.println(String(millis()/1000) +  "s --> [SENSORS] (PIR) Is in the room");
+        Serial.println(String(millis()/1000) +  "s --> [SENSORS] (PIR) Is in the room");
         pirState = 2;
         timestampFall = millis();
       }
@@ -42,14 +42,14 @@ void PIRSensor::presenceRoutine() {
         }
         else {
           pirState = 0;
-          //Serial.println(String(millis()/1000) +  "s --> [SENSORS] (PIR) Left The Room");
+          Serial.println(String(millis()/1000) +  "s --> [SENSORS] (PIR) Left The Room");
         }
       }
       break;
     case 3:
       presence_alarm = true;
       pirState = 0;
-      //Serial.println(String(millis()/1000) +  "s --> [SENSORS] (PIR) Is in the floor");
+      Serial.println(String(millis()/1000) +  "s --> [SENSORS] (PIR) Is in the floor");
       
     
       break;

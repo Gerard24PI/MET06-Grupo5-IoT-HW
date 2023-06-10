@@ -25,6 +25,27 @@ LED grifoLed;
 char grifoMode;
 
 
+void servoCallback(StreamData data)
+{
+  Serial.print("Servo Updated: ");
+  printResult(data);
+  switch(data.to<int>()){
+    case 0:
+      grifo_update_mode(GRIFO_MODE_TANCAT);
+      break;
+    case 90:
+      grifo_update_mode(GRIFO_MODE_SEMIOBERT);
+      break;
+    case 180:
+      grifo_update_mode(GRIFO_MODE_OBERT);
+      break;
+    default:
+      break;
+  }
+    
+}
+
+
 void setupGrifo() {
   grifoModeButton = Button(PIN_MODE_BUTTON);
   grifoEmergencyButton = Button(PIN_ALARM_BUTTON);
@@ -65,17 +86,21 @@ void grifo_update_mode(char mode) {
     case GRIFO_MODE_SEMIOBERT:
       degrees = GRIFO_POS_SEMIOBERT;
       brightness = MED_BRIGHTNESS;
+      setServoToFB(90);
       break;
     case GRIFO_MODE_OBERT:
       degrees = GRIFO_POS_OBERT;
       brightness = HIGH_BRIGHTNESS;
+      setServoToFB(180);
       break;
     case GRIFO_MODE_TANCAT:
       degrees = GRIFO_POS_TANCAT;
       brightness = LOW_BRIGHTNESS;
+      setServoToFB(0);
       break;
   }
   grifoServomotor.moveServomotor(degrees);
+
   grifoLed.setBrightness(brightness);
 
   if(DEBUG_GRIFO){

@@ -18,7 +18,8 @@
 #define MENU_SCAIDAS  1
 #define MENU_GRIFO    2
 #define MENU_SLIGHT   3
-#define MENU_EXIT     4
+#define TEST_FIREBASE 4
+#define MENU_EXIT     5
 
 
 // Pin Declarations for ESP8266 board
