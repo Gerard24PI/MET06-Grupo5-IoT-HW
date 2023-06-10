@@ -7,9 +7,9 @@ void streamCallback(StreamData data){
   }else if (path == "/temp_alarm"){
     tempAlarmCallback(data);
   }else if (path == "/humidity"){
-    humidityCallback(data);
+    //humidityCallback(data);
   }else if (path == "/temp"){
-    tempCallback(data);
+    //tempCallback(data);
   }else if (path == "/light"){
     lightCallback(data);
   }else if (path == "/servo"){

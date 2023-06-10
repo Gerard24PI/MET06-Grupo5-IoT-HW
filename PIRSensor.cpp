@@ -1,6 +1,6 @@
 #include "PIRSensor.h"
 
-#define FALL_CHECK_TIME_MS 20
+#define FALL_CHECK_TIME_MS 200
 
 PIRSensor::PIRSensor(int pinPirSensorBottom, int pinPirSensorTop) : pinPirSensorBottom(pinPirSensorBottom), pinPirSensorTop(pinPirSensorTop) {
   this->presence_alarm = false;
@@ -15,9 +15,11 @@ void PIRSensor::setupPIR() {
 void PIRSensor::presenceRoutine() {
   boolean presenceBot = readPresence(pinPirSensorBottom);
   boolean presenceTop = readPresence(pinPirSensorTop);
-  Serial.println(String(millis()/1000) +  "s --> [SENSORS] PIRTop: " + String(presenceTop) + "PIRBot: " + String(presenceBot));
+  if(DEBUG_PIR_SENSOR){
+    Serial.println(String(millis()/1000) +  "s --> [SENSORS] PIRTop: " + String(presenceTop) + "PIRBot: " + String(presenceBot));
+  }
+  
 
-  //Serial.println(pirState);
 
   switch (pirState) {
     case 0:
@@ -56,7 +58,9 @@ void PIRSensor::presenceRoutine() {
   }  
 }
 
-
+void PIRSensor::resetAlarm(){
+  this->pirState = 0;
+}
 
 boolean PIRSensor::isInTheRoom() {
   boolean presenceBot = readPresence(pinPirSensorBottom);

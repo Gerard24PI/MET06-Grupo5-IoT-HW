@@ -5,12 +5,12 @@
 
 // Debugging Settings
 #define DEBUG_DEVICES_SETUP_BASIC     true
-#define DEBUG_ALARMS                  false
+#define DEBUG_ALARMS                  false;
 #define DEBUG_PIR_SENSOR              true
 #define DEBUG_TEMP_HUM_SENSOR         false
 #define DEBUG_BUTTONS                 false
 #define DEBUG_TIMING                  false
-#define DEBUG_GRIFO                   true
+#define DEBUG_GRIFO                   false
 #define DEBUG_LEDS                    false
 
 // Options

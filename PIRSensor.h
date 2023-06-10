@@ -22,6 +22,7 @@ class PIRSensor {
     boolean isInTheFloor();
     boolean readPresence(int pin);
     void pirTest();
+    void resetAlarm();
     bool checkAlarmStatus();
     void resetAlarmStatus();
 };
