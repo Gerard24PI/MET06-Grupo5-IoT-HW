@@ -27,7 +27,7 @@ char grifoMode;
 
 void servoCallback(StreamData data)
 {
-  Serial.print("Servo Updated: ");
+  Serial.print("Servo Updated from FB: ");
   printResult(data);
   switch(data.to<int>()){
     case 0:

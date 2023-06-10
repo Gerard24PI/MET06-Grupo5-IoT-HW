@@ -54,12 +54,7 @@ void tempCallback(StreamData data)
   Serial.println();
 }
 
-void lightCallback(StreamData data)
-{
-  Serial.print("Light Updated: ");
-  printResult(data);
-  Serial.println();
-}
+
 
 
 void streamTimeoutCallback(bool timeout)

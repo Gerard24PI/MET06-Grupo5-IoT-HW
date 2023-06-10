@@ -16,12 +16,22 @@ typedef struct {
 } BrightnessRange;
 char sLightMode;
 
+int global_brightness = 0;
 
 // Sensor & Actuator Objects
 BrightnessRange brightnessRange;
 Button sLightModeButton;
 LED sLightLed;
 AnalogSensor sLightAnalogSensor;
+
+
+void lightCallback(StreamData data)
+{
+  Serial.print("Light Updated from FB: ");
+  printResult(data);
+  global_brightness = data.to<int>();
+  
+}
 
 
 void setupSmartLight() {
@@ -41,13 +51,23 @@ void smartLight() {
 
   if (sLightModeButton.isPressed()) {
     sLight_change_mode();
+
+    // Update light value in Firebase
+    int analogValPct = sLightAnalogSensor.getAnalogValuePct();
+    setLightToFB(getBrightnessAcordingRange(analogValPct));
   }
 
-  //Cada X temps, es consulta valor Analògic i s'actualitza brightness segons valor analogic i el rang de brillantor permes en aquell mode
-  if (sLightAnalogSensor.analogAvailable()) {
-    int analogValPct = sLightAnalogSensor.getAnalogValuePct();
-    int brightness = getBrightnessAcordingRange(analogValPct);
-    sLightLed.setBrightness(brightness);
+  if(LIGHT_SENSOR_OVERRIDE_POT){
+    // Firebase value will be used
+    sLightLed.setBrightness(global_brightness);
+  }else{
+    //Cada X temps, es consulta valor Analògic i s'actualitza brightness segons valor analogic i el rang de brillantor permes en aquell mode
+    if (sLightAnalogSensor.analogAvailable()) {
+      int analogValPct = sLightAnalogSensor.getAnalogValuePct();
+      int brightness = getBrightnessAcordingRange(analogValPct);
+      sLightLed.setBrightness(brightness);
+    } 
+
   }
 }
 

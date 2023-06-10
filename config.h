@@ -13,6 +13,8 @@
 #define DEBUG_GRIFO                   true
 #define DEBUG_LEDS                    false
 
+// Options
+#define LIGHT_SENSOR_OVERRIDE_POT     true
 
 // Menu Options
 #define MENU_SCAIDAS  1
