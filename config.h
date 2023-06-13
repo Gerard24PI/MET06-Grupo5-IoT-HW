@@ -10,15 +10,18 @@
 #define DEBUG_TEMP_HUM_SENSOR         false
 #define DEBUG_BUTTONS                 false
 #define DEBUG_TIMING                  false
-#define DEBUG_GRIFO                   true
+#define DEBUG_GRIFO                   false
 #define DEBUG_LEDS                    false
 
+// Options
+#define LIGHT_SENSOR_OVERRIDE_POT     true
 
 // Menu Options
 #define MENU_SCAIDAS  1
 #define MENU_GRIFO    2
 #define MENU_SLIGHT   3
-#define MENU_EXIT     4
+#define TEST_FIREBASE 4
+#define MENU_EXIT     5
 
 
 // Pin Declarations for ESP8266 board

@@ -44,9 +44,7 @@ int TempHumSensor::checkAlarmStatus(){
     temp_alarm = (temperature > 0 && (temperature < float(MIN_TEMP) || temperature > float(MAX_TEMP)));
     humidity_alarm = (humidity > 0 && (humidity < float(MIN_HUMIDITY) || humidity > float(MAX_HUMIDITY)));
 
-    if(DEBUG_ALARMS){
-      Serial.println(String(last_alarm_timestamp/1000) +  "s --> [ALARMS] Temp Alarm: " + String(temp_alarm) + "; Hum Alarm: " + String(humidity_alarm));
-    }
+  
   }
 
   if (humidity_alarm && temp_alarm){
