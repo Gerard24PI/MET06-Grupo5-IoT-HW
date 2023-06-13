@@ -31,8 +31,8 @@ int firebaseServo = 0;
 #include <addons/RTDBHelper.h>
 
 /* 1. Define the WiFi credentials */
-#define WIFI_SSID "VODAFONE_E200"
-#define WIFI_PASSWORD "exito2020"
+#define WIFI_SSID "Gerard PI OP8Pro"
+#define WIFI_PASSWORD "gimmieN37"
 #define API_KEY "AIzaSyAmW8Qm3YYyRfSWZ_6_hKzw2KFvcQ9OThE"
 #define DATABASE_URL "https://met06-f9acf-default-rtdb.europe-west1.firebasedatabase.app/"
 #define USER_EMAIL "marcnueno@gmail.com"

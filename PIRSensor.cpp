@@ -12,50 +12,39 @@ void PIRSensor::setupPIR() {
   pirState = 0;
 }
 
+unsigned long timeStampBot = 0;
+unsigned long timeStampTop = 0;
+bool flag = false;
+bool flag2 = false;
+
 void PIRSensor::presenceRoutine() {
   boolean presenceBot = readPresence(pinPirSensorBottom);
   boolean presenceTop = readPresence(pinPirSensorTop);
-  if(DEBUG_PIR_SENSOR){
-    Serial.println(String(millis()/1000) +  "s --> [SENSORS] PIRTop: " + String(presenceTop) + "PIRBot: " + String(presenceBot));
-  }
+  // if(DEBUG_PIR_SENSOR){
+  //   Serial.println(String(millis()/1000) +  "s --> [SENSORS] PIRTop: " + String(presenceTop) + "PIRBot: " + String(presenceBot));
+  // }
   
+  if (!flag) {
+    Serial.println(String(millis()/1000) +  "s --> [SENSORS] PIRTop: " + String(presenceTop) + " PIRBot: " + String(presenceBot));
+  }
 
+  if (presenceTop && !flag && !flag2){
+    timeStampTop = millis();
+    flag = true;
+  }
+  if(presenceBot && !flag2 && flag){
+    timeStampBot = millis();
+    //Serial.println( "Time: " + String(timeStampBot - timeStampTop) + " ms");
 
-  switch (pirState) {
-    case 0:
-      presence_alarm = false;
-      if (isInTheRoom()) {
-        pirState = 1;
-      }
-      break;
-    case 1:
-      if (isInTheFloor()) {
-        Serial.println(String(millis()/1000) +  "s --> [SENSORS] (PIR) Is in the room");
-        pirState = 2;
-        timestampFall = millis();
-      }
-      break;
-    case 2:
-      // Wait for FALL_CHECK_TIME_MS milliseconds to confirm the fall
-      timestampNow = millis();
-      if (timestampNow - timestampFall >= FALL_CHECK_TIME_MS) {
-        if (isInTheFloor()) {
-          pirState = 3;
-        }
-        else {
-          pirState = 0;
-          Serial.println(String(millis()/1000) +  "s --> [SENSORS] (PIR) Left The Room");
-        }
-      }
-      break;
-    case 3:
-      presence_alarm = true;
-      pirState = 0;
-      Serial.println(String(millis()/1000) +  "s --> [SENSORS] (PIR) Is in the floor");
-      
-    
-      break;
-  }  
+    if((timeStampBot - timeStampTop > 10)){
+      this->presence_alarm = true;
+      flag2 = true;
+    }
+    else {
+      flag = false;
+      flag2 = false;
+    }
+  }
 }
 
 void PIRSensor::resetAlarm(){
