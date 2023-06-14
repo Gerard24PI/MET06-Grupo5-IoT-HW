@@ -14,17 +14,19 @@ void PIRSensor::setupPIR() {
 
 unsigned long timeStampBot = 0;
 unsigned long timeStampTop = 0;
+boolean presenceBot = false;
+boolean presenceTop = false;
 bool flag = false;
 bool flag2 = false;
 
 void PIRSensor::presenceRoutine() {
-  boolean presenceBot = readPresence(pinPirSensorBottom);
-  boolean presenceTop = readPresence(pinPirSensorTop);
+  presenceBot = readPresence(pinPirSensorBottom);
+  presenceTop = readPresence(pinPirSensorTop);
   // if(DEBUG_PIR_SENSOR){
   //   Serial.println(String(millis()/1000) +  "s --> [SENSORS] PIRTop: " + String(presenceTop) + "PIRBot: " + String(presenceBot));
   // }
   
-  if (!flag) {
+  if (!flag2) {
     Serial.println(String(millis()/1000) +  "s --> [SENSORS] PIRTop: " + String(presenceTop) + " PIRBot: " + String(presenceBot));
   }
 
@@ -48,27 +50,9 @@ void PIRSensor::presenceRoutine() {
 }
 
 void PIRSensor::resetAlarm(){
-  this->pirState = 0;
-}
-
-boolean PIRSensor::isInTheRoom() {
-  boolean presenceBot = readPresence(pinPirSensorBottom);
-  boolean presenceTop = readPresence(pinPirSensorTop);
-  if (presenceBot && presenceTop) {
-
-    return true;
-  }
-  return false;
-}
-
-boolean PIRSensor::isInTheFloor() {
-  boolean presenceBot = readPresence(pinPirSensorBottom);
-  boolean presenceTop = readPresence(pinPirSensorTop);
-  if (presenceBot && !presenceTop) {
-
-    return true;
-  }
-  return false;
+  flag = false;
+  flag2 = false;
+  this->presence_alarm = false;
 }
 
 boolean PIRSensor::readPresence(int pin) {
